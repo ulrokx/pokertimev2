@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "exactOptionalPropertyTypes": false,
+    "composite": true
+  },
+  "include": ["src/**/*.ts"],
+  "extends": "../../tsconfig.json"
+}
