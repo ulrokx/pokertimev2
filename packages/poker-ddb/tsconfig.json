@@ -2,7 +2,7 @@
   "compilerOptions": {
     "exactOptionalPropertyTypes": false,
     "composite": true,
-	"outDir": "dist",
+	"declarationMap": true
   },
   "include": ["src/**/*.ts"],
   "extends": "../../tsconfig.json"

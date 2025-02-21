@@ -1,11 +1,11 @@
 {
-  "name": "@pokertimev2/poker",
+  "name": "@pokertimev2/poker-ddb",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/src/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "vitest",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,9 @@
     "vitest": "^2.0.5"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.637.0",
+    "@aws-sdk/lib-dynamodb": "^3.637.0",
+    "@pokertimev2/poker": "workspace:*",
     "crypto-secure-shuffle": "^2.0.5"
   }
 }

@@ -25,6 +25,14 @@ export class Card {
     public hidden: boolean,
   ) {}
 
+  public serialize() {
+	return JSON.stringify({
+	  suit: this.suit,
+	  rank: this.rank,
+	  hidden: this.hidden
+	});
+  }
+
   public static hidden(): Card {
     return new Card("h", "2", true);
   }

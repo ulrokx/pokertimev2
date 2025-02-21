@@ -4,6 +4,13 @@ import { Card } from "./card";
 export class Deck {
   private nextCardIndex = 0;
 
+  public serialize() {
+	return JSON.stringify({
+		nextCardIndex: this.nextCardIndex,
+		cards: this.cards.map(card => card.serialize())
+	})
+  }	
+
   constructor(private cards: Card[]) {}
 
   public static async shuffled() {

@@ -13,5 +13,8 @@
     "moduleResolution": "node16"
   },
   "extends": "@tsconfig/strictest/tsconfig.json",
-  "references": [{ "path": "./packages/poker" }]
+  "references": [
+    { "path": "./packages/poker" },
+    { "path": "./packages/poker-ddb" }
+  ]
 }

@@ -20,12 +20,6 @@ export enum Action {
   BET = "bet",
 }
 
-export interface HoldemGameProps {
-  seats: Seat[];
-  buttonSeatId: string;
-  deck: Deck;
-}
-
 export type HoldemGameAction =
   | {
       action: Action.FOLD | Action.CHECK | Action.CALL;
@@ -68,11 +62,41 @@ export class HoldemGame {
   private lastBet: number = 0;
   private nextToAct: Position;
   private actionLog: ActionLogItem[] = [];
-  private deck: Deck;
   private communityCards: Card[] = [];
   private outcome?: HoldemGameOutcome;
 
-  constructor({ seats, buttonSeatId, deck }: HoldemGameProps) {
+  public serialize() {
+	return JSON.stringify({
+		seats: this.seats,
+		state: this.state,
+		pot: this.pot,
+		lastBet: this.lastBet,
+		nextToAct: this.nextToAct,
+		actionLog: this.actionLog,
+		communityCards: this.communityCards,
+		outcome: this.outcome,
+		deck: this.deck.serialize(),
+	})
+  }
+
+  private fromSerialized(serialized: string) {
+	const parsed = JSON.parse(serialized);
+	this.seats = parsed.seats;
+	this.state = parsed.state;
+	this.pot = parsed.pot;
+	this.lastBet = parsed.lastBet;
+	this.nextToAct = parsed.nextToAct;
+	this.actionLog = parsed.actionLog;
+	this.communityCards = parsed.communityCards;
+	this.outcome = parsed.outcome;
+	this.deck = Deck.fromSerialized(parsed
+		  }
+
+  constructor(
+  seats: Seat[],
+  buttonSeatId: string,
+  private deck: Deck
+) {
     const seatCount = Object.keys(seats).length;
     if (seatCount < 2) {
       throw new Error("At least 2 seats are required to start a hand");
@@ -119,8 +143,6 @@ export class HoldemGame {
     this.bet(sb, 1);
     this.bet(bb, 2);
     this.nextToAct = bb.nextPosition;
-
-    this.deck = deck;
   }
 
   public act(position: Position, action: HoldemGameAction) {
